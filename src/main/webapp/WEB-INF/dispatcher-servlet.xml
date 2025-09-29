@@ -12,8 +12,21 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="controlador1" class="controllers.LibrosController">
+<!--    para que funcione spring mvc, hay que definir una bean por cada controlador a usar-->
 
-    </bean>
+<!--    <bean id="controlador1" class="controllers.LibrosController">-->
+
+<!--    </bean>-->
+<!--    <bean id="controlador2" class="controllers.AdminController">-->
+
+<!--    </bean>-->
+
+<!--    Vamos a acitvar el uso de anotaciones para beans-->
+    <context:annotation-config/>
+<!--    Vamos a decirle a spring que nos cree una bean por cada clase-->
+<!--    que tenga una marca de spring: @Controller, @Service, @Repository... -->
+
+<!--    el paque a escanear es controllers-->
+    <context:component-scan base-package="controllers"/>
 
 </beans>

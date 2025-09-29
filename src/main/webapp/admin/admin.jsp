@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: gbaque
-  Date: 26/09/2025
-  Time: 18:38
+  Date: 29/09/2025
+  Time: 18:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,9 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-
-<a href="admin/">Acceso a administración</a>
-Listado de libros de la tienda: <br>
+Bienvenido a la parte de admin <br>
+<a href="libros/crear">Crear nuevo libro</a>
 
 </body>
 </html>
