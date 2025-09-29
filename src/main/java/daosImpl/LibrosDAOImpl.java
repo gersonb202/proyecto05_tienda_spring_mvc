@@ -33,6 +33,9 @@ public class LibrosDAOImpl implements LibrosDAO {
         valores.put("titulo", libro.getTitulo());
         valores.put("precio", libro.getPrecio());
         valores.put("descripcion", libro.getDescripcion());
+
+        // Ejecutar inseción
+        this.simpleInsert.execute(valores);
     }
 
     @Override
