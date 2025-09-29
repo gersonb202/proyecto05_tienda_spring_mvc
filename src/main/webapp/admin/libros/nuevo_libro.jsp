@@ -18,8 +18,7 @@ Introduce los datos del nuevo libro: <br>
 
 Vamos a usar un form de spring: <br>
 
-<springform:form modelAttribute="libro" method="guardarNuevoLibro">
-
+<springform:form modelAttribute="libro" method="post" action="guardarNuevoLibro">
     titulo: <springform:input path="titulo" /> <br>
     precio: <springform:input path="precio"/> <br>
     descripcion: <springform:textarea path="descripcion" rows="2" cols="18"/> <br>

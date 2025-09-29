@@ -3,12 +3,21 @@ package controllers.admin;
 import daos.LibrosDAO;
 import daosImpl.LibrosDAOImpl;
 import modelo.Libro;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LibrosControllerAdmin {
+
+    // Así pido una bean del contenedor de spring:
+    // Consigues pedir bean de spring que tenga como id l indicado en Qualifier
+    @Autowired
+    @Qualifier("librosDAO")
+    private LibrosDAOImpl librosDAO;
+
 
     @RequestMapping("admin/libros/crear")
     public String crear(Model model) {
@@ -24,8 +33,9 @@ public class LibrosControllerAdmin {
     @RequestMapping("admin/libros/guardarNuevoLibro")
     public String guardarNuevoLibro(Libro libro){
         // Gracias a spring ya tengo un objeto de libro, con todos los insertaddos en el formulario
-        LibrosDAO dao = new LibrosDAOImpl();
-        dao.registrarLibro(libro);
+        // Lo siguiente no valdría porque no tiene asignado el dataSource:
+        // LibrosDAO dao = new LibrosDAOImpl();
+        librosDAO.registrarLibro(libro);
         return "nuevo_libro_ok.jsp";
     }
 
