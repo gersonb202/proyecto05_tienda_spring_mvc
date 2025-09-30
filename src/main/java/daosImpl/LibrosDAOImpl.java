@@ -1,7 +1,10 @@
 package daosImpl;
 
+import constantesSql.ConstantesSQL;
 import daos.LibrosDAO;
+import mappers.LibrosMapper;
 import modelo.Libro;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
@@ -16,6 +19,7 @@ public class LibrosDAOImpl implements LibrosDAO {
 
     private DataSource dataSource;
     private SimpleJdbcInsert simpleInsert;
+    private JdbcTemplate jdbcTemplate;
 
     // Cuando se asigne el datasource, voy a preparar el simpleInsert
     public void setDataSource(DataSource dataSource) {
@@ -23,6 +27,7 @@ public class LibrosDAOImpl implements LibrosDAO {
         // Instanciamos el simpleInsert y le metemos el datasource
         this.simpleInsert = new SimpleJdbcInsert(dataSource);
         this.simpleInsert.setTableName("libros");
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
@@ -40,7 +45,9 @@ public class LibrosDAOImpl implements LibrosDAO {
 
     @Override
     public List<Libro> obtenerLibros() {
-        return Collections.emptyList();
+        // Vamos a usar el mapper, par facilmente obtener los libros
+        List<Libro> libros = this.jdbcTemplate.query(ConstantesSQL.SQL_OBTENER_LIBROS, new LibrosMapper());
+        return libros;
     }
 
     @Override

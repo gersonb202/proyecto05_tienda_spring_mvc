@@ -21,7 +21,7 @@
 </div>
 <div>
     <a href="crearLibro">Registrar un nuevo producto</a>
-    <a href="">Gestionar productos</a>
+    <a href="listarLibros">Gestionar productos</a>
     <a href="">Registrar un nuevo usuario</a>
     <a href="">Gestionar usuario</a>
 

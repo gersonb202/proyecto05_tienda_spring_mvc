@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 public class LibrosControllerAdmin {
 
@@ -18,6 +20,17 @@ public class LibrosControllerAdmin {
     @Qualifier("librosDAO")
     private LibrosDAOImpl librosDAO;
 
+
+    @RequestMapping("listarLibros")
+    public String listarLibros(Model modelo){
+        List<Libro> libros = librosDAO.obtenerLibros();
+        modelo.addAttribute("libros", libros);
+        // Codigo de prueba para comprobar que tengo los libros
+        for(Libro libro : libros){
+            System.out.println("Libro: " + libro.getTitulo());
+        }
+        return "admin/libros";
+    }
 
     @RequestMapping("crearLibro")
     public String crear(Model model) {
