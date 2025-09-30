@@ -1,1 +1,1 @@
-<jsp:forward page="libros/listar"></jsp:forward>
+<jsp:forward page="inicio"></jsp:forward>

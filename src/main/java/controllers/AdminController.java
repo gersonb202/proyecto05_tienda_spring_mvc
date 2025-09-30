@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 
-    @RequestMapping("/admin")
+    @RequestMapping("admin")
     public String admin() {
         System.out.println("Se ejecuta el controlador de admin");
-        return "admin.jsp";
+        return "admin/inicio";
     }
 
 }

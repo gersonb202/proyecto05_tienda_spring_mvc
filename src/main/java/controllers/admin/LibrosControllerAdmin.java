@@ -19,7 +19,7 @@ public class LibrosControllerAdmin {
     private LibrosDAOImpl librosDAO;
 
 
-    @RequestMapping("admin/libros/crear")
+    @RequestMapping("crearLibro")
     public String crear(Model model) {
         // Vamos a decir los valores por defecto del libro que le llega al springform
 
@@ -27,16 +27,16 @@ public class LibrosControllerAdmin {
         nuevo.setPrecio(1.0);
         model.addAttribute("libro", nuevo);
 
-        return "nuevo_libro.jsp";
+        return "admin/nuevo_libro";
     }
 
-    @RequestMapping("admin/libros/guardarNuevoLibro")
+    @RequestMapping("guardarNuevoLibro")
     public String guardarNuevoLibro(Libro libro){
         // Gracias a spring ya tengo un objeto de libro, con todos los insertaddos en el formulario
         // Lo siguiente no valdría porque no tiene asignado el dataSource:
         // LibrosDAO dao = new LibrosDAOImpl();
         librosDAO.registrarLibro(libro);
-        return "nuevo_libro_ok.jsp";
+        return "admin/nuevo_libro_ok";
     }
 
 }
