@@ -28,6 +28,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
 <!--    el paque a escanear es controllers-->
     <context:component-scan base-package="controllers"/>
+    <context:component-scan base-package="RESTcontrollers"/>
 
 <!--    Configurar spring jdbc para ayudarme a registrar en base de datos-->
 

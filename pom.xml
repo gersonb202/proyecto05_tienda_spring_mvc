@@ -61,6 +61,12 @@
             <artifactId>spring-jdbc</artifactId>
             <version>5.3.22</version> <!-- Ajustar la versión según el proyecto -->
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+            <!-- Puedes comprobar la última versión en https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        </dependency>
     </dependencies>
 
 
