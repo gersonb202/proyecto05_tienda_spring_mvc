@@ -13,5 +13,6 @@
 <body>
 <a href="admin">Acceder a administración</a>
 <div>Bienvenido a mi tienda</div>
+
 </body>
 </html>

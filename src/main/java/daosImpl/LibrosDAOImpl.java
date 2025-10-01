@@ -52,7 +52,7 @@ public class LibrosDAOImpl implements LibrosDAO {
 
     @Override
     public void borrarLibro(long id) {
-
+        this.jdbcTemplate.update(ConstantesSQL.SQL_BORRAR_LIBRO, id);
     }
 
     @Override

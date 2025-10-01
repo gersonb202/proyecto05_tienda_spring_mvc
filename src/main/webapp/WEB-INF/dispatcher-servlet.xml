@@ -51,4 +51,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <property name="suffix" value=".jsp" />
     </bean>
 
+<!--    En spring mvc todas las peticiones deben pasar por un controlador-->
+<!--    para permitir que javascript css y otros recursos externos puedan-->
+<!--    ser importados directamente, hay que poner lo siguiente:-->
+    <mvc:annotation-driven/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/plantillas_mustache/**" location="/plantillas_mustache/"/>
+
+
 </beans>

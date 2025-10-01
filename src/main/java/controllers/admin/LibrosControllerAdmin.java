@@ -52,4 +52,11 @@ public class LibrosControllerAdmin {
         return "admin/nuevo_libro_ok";
     }
 
+    @RequestMapping("borrarLibro")
+    public String borrarLibro(String id, Model modelo){
+        librosDAO.borrarLibro(Long.parseLong(id));
+        return listarLibros(modelo);
+
+    }
+
 }
