@@ -22,7 +22,6 @@ public class LibrosREST {
     @RequestMapping("librosREST/obtener")
     public ResponseEntity<String> obtener(){
         String libtrosJSON = new Gson().toJson(librosDAO.obtenerLibros());
-        return new ResponseEntity<String>(libtrosJSON, HttpStatus.OK);
     }
 
 }
