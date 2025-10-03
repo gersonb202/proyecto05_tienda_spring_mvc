@@ -27,12 +27,12 @@ public class LibrosDAOImpl implements LibrosDAO {
         // Instanciamos el simpleInsert y le metemos el datasource
         this.simpleInsert = new SimpleJdbcInsert(dataSource);
         this.simpleInsert.setTableName("libros");
+        this.simpleInsert.usingGeneratedKeyColumns("id");
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public void registrarLibro(Libro libro) {
-        System.out.println("resgistrar nuevo libro = " + libro);
         HashMap<String, Object> valores =
                 new HashMap<String, Object>();
         valores.put("titulo", libro.getTitulo());
@@ -40,7 +40,9 @@ public class LibrosDAOImpl implements LibrosDAO {
         valores.put("descripcion", libro.getDescripcion());
 
         // Ejecutar inseción
-        this.simpleInsert.execute(valores);
+        long idGenerado = this.simpleInsert.executeAndReturnKey(valores).longValue();
+        libro.setId(idGenerado);
+        System.out.println("resgistrado en base de datos: " + libro);
     }
 
     @Override
@@ -57,6 +59,11 @@ public class LibrosDAOImpl implements LibrosDAO {
 
     @Override
     public void actualizarLibro(Libro libro) {
+        this.jdbcTemplate.update(ConstantesSQL.SQL_GUARDAR_CAMBIOS_LIBRO, libro.getTitulo(), libro.getPrecio(), libro.getDescripcion(), libro.getId());
+    }
 
+    @Override
+    public Libro obtenerLibroId(long id) {
+        return this.jdbcTemplate.queryForObject(ConstantesSQL.SQL_OBTENER_LIBRO_ID, new Object[]{id}, new LibrosMapper());
     }
 }

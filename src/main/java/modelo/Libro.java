@@ -1,10 +1,13 @@
 package modelo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Libro {
 
     private String titulo;
     private Double precio;
     private String descripcion;
+    private MultipartFile imagen;
     private long id;
 
     public Libro() {
@@ -53,6 +56,14 @@ public class Libro {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public MultipartFile getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(MultipartFile imagen) {
+        this.imagen = imagen;
     }
 
     @Override

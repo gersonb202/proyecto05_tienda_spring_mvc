@@ -1,14 +1,14 @@
 package controllers.admin;
 
 import daos.LibrosDAO;
-import daosImpl.LibrosDAOImpl;
 import modelo.Libro;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import utilidades.GestorArchivos;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -17,8 +17,12 @@ public class LibrosControllerAdmin {
     // Así pido una bean del contenedor de spring:
     // Consigues pedir bean de spring que tenga como id l indicado en Qualifier
     @Autowired
-    @Qualifier("librosDAO")
-    private LibrosDAOImpl librosDAO;
+    // No es necesario indicar la id de la bean del contenedor de spring que estamos pidiendo
+    // si solo hay una bean del tipo de dato pedido
+//    @Qualifier("librosDAO")
+    private LibrosDAO librosDAO;
+    // De esta forma hemos pedido al contendor de spring
+    // la única bean/objeto  que tengga de una clase que implemente librosDAO
 
 
     @RequestMapping("listarLibros")
@@ -44,11 +48,16 @@ public class LibrosControllerAdmin {
     }
 
     @RequestMapping("guardarNuevoLibro")
-    public String guardarNuevoLibro(Libro libro){
+    public String guardarNuevoLibro(Libro libro, HttpServletRequest request){
         // Gracias a spring ya tengo un objeto de libro, con todos los insertaddos en el formulario
         // Lo siguiente no valdría porque no tiene asignado el dataSource:
         // LibrosDAO dao = new LibrosDAOImpl();
         librosDAO.registrarLibro(libro);
+
+        // Una vez registrado el libro en base de datos, vamos a guardar la imagen en una carpeta
+        String rutaReal = request.getServletContext().getRealPath("");
+        GestorArchivos.guardarImagenLibro(libro, rutaReal);
+
         return "admin/nuevo_libro_ok";
     }
 
@@ -56,7 +65,19 @@ public class LibrosControllerAdmin {
     public String borrarLibro(String id, Model modelo){
         librosDAO.borrarLibro(Long.parseLong(id));
         return listarLibros(modelo);
+    }
 
+    // Para que sirve el model??
+    @RequestMapping("modificarLibro")
+    public String modificarLibro(String id, Model modelo){
+        Libro libro = librosDAO.obtenerLibroId(Long.parseLong(id));
+        modelo.addAttribute("libroEditar", libro);
+        return "admin/editar_libro";
+    }
+    @RequestMapping("guardarCambiosLibro")
+    public String guardarCambiosLibro(Libro libro, Model modelo){
+        librosDAO.actualizarLibro(libro);
+        return listarLibros(modelo);
     }
 
 }

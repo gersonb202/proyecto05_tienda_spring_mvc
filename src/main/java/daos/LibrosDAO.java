@@ -11,4 +11,5 @@ public interface LibrosDAO {
     void borrarLibro(long id);
     void actualizarLibro(Libro libro);
 
+    Libro obtenerLibroId(long l);
 }

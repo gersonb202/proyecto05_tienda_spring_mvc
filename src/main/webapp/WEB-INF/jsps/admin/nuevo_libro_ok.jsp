@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<jsp:include page="menu.jsp"></jsp:include>
 libro creado correctamente
 
 </body>
