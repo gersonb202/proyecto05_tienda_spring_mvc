@@ -89,7 +89,7 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/js/**" location="/js/"/>
     <mvc:resources mapping="/plantillas_mustache/**" location="/plantillas_mustache/"/>
-    <mvc:resources mapping="/subidas/**" location="/subidas/"/>
+    <mvc:resources location="/subidas/" mapping="/subidas/**"/>
 
 
 </beans>

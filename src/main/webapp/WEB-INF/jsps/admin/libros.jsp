@@ -15,10 +15,10 @@
 <jsp:include page="menu.jsp"></jsp:include>
 
 Gestión de los libros de la tienda: <br>
-<c:forEach items="${libros}" var ="libro">
+<c:forEach items="${xxx}" var ="libro">
     <div style="margin: 10px">
         titulo: ${libro.titulo} <br>
-        <img src="subidas/${libro.id}.jpg" height="80px" <br>
+        <img src="subidas/${libro.id}.jpg" height="80px"/> <br>
         precio: ${libro.precio} <br>
         descripción: ${libro.descripcion} <br>
         <a onclick="return confirm('¿Estás seguro?')" href="borrarLibro?id=${libro.id}">BORRAR</a> <br>
