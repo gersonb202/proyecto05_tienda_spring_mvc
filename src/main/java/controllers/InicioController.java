@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class InicioController {
 
-    @RequestMapping("/inicio")
+    @RequestMapping("inicio")
     public String inicio(){
 
         // Vamos a decirle a spring mvc que lo que indique en el return

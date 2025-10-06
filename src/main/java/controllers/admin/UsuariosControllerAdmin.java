@@ -1,0 +1,28 @@
+package controllers.admin;
+
+import modelo.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import servicios.ServicioUsuarios;
+
+@Controller
+public class UsuariosControllerAdmin {
+
+    @Autowired
+    private ServicioUsuarios servicioUsuarios;
+
+    @RequestMapping("crearUsuario")
+    public String crearUsuario(Model modelo){
+        modelo.addAttribute("nuevoUsuario", new Usuario());
+        return "admin/nuevo_usuario";
+    }
+
+    @RequestMapping("guardarNuevoUsuario")
+    public String guardarNuevoUsuario(Usuario nuevoUsuario){
+        servicioUsuarios.registrarUsuario(nuevoUsuario);
+        return "admin/nuevo_usuario_ok";
+    }
+
+}

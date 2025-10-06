@@ -4,7 +4,7 @@
 <div>
     <a href="crearLibro">Registrar un nuevo producto</a>
     <a href="listarLibros">Gestionar productos</a>
-    <a href="">Registrar un nuevo usuario</a>
+    <a href="crearUsuario">Registrar un nuevo usuario</a>
     <a href="">Gestionar usuario</a>
     <a href="">Gestionar categorías</a>
 </div>
