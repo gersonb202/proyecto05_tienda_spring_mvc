@@ -28,7 +28,7 @@ public class LibrosControllerAdmin {
     @RequestMapping("listarLibros")
     public String listarLibros(Model modelo){
         List<Libro> libros = librosDAO.obtenerLibros();
-        modelo.addAttribute("libros", libros);
+        modelo.addAttribute("xxx", libros);
         // Codigo de prueba para comprobar que tengo los libros
         for(Libro libro : libros){
             System.out.println("Libro: " + libro.getTitulo());
