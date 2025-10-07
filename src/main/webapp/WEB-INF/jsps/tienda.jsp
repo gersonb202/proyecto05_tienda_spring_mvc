@@ -18,7 +18,7 @@
 <div>
     <a id="enlace_productos" href="#">PRODUCTOS</a> <br>
     <a id="enlace_identificarme" href="#">IDENTIFICARME</a> <br>
-    <a id="" onclick="alert('por hacer...')" href="#">REGISTRARME</a> <br>
+    <a id="enlace_registrarme" href="#">REGISTRARME</a> <br>
     <a id="" onclick="alert('por hacer...')" href="#">CARRITO</a> <br>
     <a id="" onclick="alert('por hacer...')" href="#">MIS PEDIDOS</a> <br>
 </div>
@@ -28,8 +28,13 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/mustache.js"></script>
 <script type="text/javascript">
+    var plantilla_registro = ""
     var plantilla_login = ""
     var plantilla_libros = ""
+
+    $.get("plantillas_mustache/registrarme.html", function(valor){
+        plantilla_registro = valor
+    })
 
     $.get("plantillas_mustache/login.html", function(valor){
         plantilla_login = valor
@@ -51,8 +56,34 @@
     function mostrarLogin(){
         $("#contenedor").html(plantilla_login)
     }
-    $("#enlace_productos").click(obtenerLibros())
+
+    function mostrarRegistro(){
+        $("#contenedor").html(plantilla_registro)
+        // Vamos a interceptar el envío de formulario
+        $("#form_registro").submit(function(evento){
+            evento.preventDefault()
+            //alert("Se intenta enviar el formulario")
+            // Recoger los datos del form y mandarlos a UsuariosREST
+            var nombre = $("#nombre").val()
+            var email = $("#email").val()
+            var pass = $("#pass").val()
+            $.post("usuariosREST/registrar",{
+                nombre: nombre,
+                email: email,
+                pass: pass
+            }).done(function(res){
+                alert(res)
+            }) // end done
+        })// end submit
+    }// end mostrarRegistro
+
+    // Atención a eventos:
+
+    $("#enlace_productos").click(obtenerLibros)
     $("#enlace_identificarme").click(mostrarLogin)
+    $("#enlace_registrarme").click(mostrarRegistro)
+
+    // Función a invocar por defecto:
     obtenerLibros()
 </script>
 </body>

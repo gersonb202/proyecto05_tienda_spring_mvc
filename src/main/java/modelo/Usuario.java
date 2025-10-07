@@ -15,6 +15,15 @@ public class Usuario {
     @GeneratedValue
     private int id;
 
+    public Usuario() {
+    }
+
+    public Usuario(String nombre, String pass, String email) {
+        this.nombre = nombre;
+        this.pass = pass;
+        this.email = email;
+    }
+
     public String getNombre() {
         return nombre;
     }
