@@ -14,5 +14,9 @@ public interface ServicioUsuarios {
 
     void registrarUsuario(Usuario usuario);
     List<Usuario> obtenerUsuarios();
+    void borrarUsuario(int id);
 
+    Usuario obtenerUsuarioPorId(int id);
+
+    void actualizarUsuario(Usuario usuarioEditar);
 }

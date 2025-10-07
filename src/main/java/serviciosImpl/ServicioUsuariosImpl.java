@@ -36,4 +36,20 @@ public class ServicioUsuariosImpl implements ServicioUsuarios {
         List<Usuario> usuarios = c.list() ;
         return usuarios;
     }
+
+    @Override
+    public void borrarUsuario(int id) {
+        Usuario usuario = obtenerUsuarioPorId(id);
+        this.sessionFactory.getCurrentSession().delete(usuario);
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorId(int id) {
+        return (Usuario) this.sessionFactory.getCurrentSession().get(Usuario.class, id);
+    }
+
+    @Override
+    public void actualizarUsuario(Usuario usuarioEditar) {
+        this.sessionFactory.getCurrentSession().merge(usuarioEditar);
+    }
 }

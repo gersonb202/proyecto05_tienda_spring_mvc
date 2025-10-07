@@ -23,6 +23,8 @@
     <a id="" onclick="alert('por hacer...')" href="#">MIS PEDIDOS</a> <br>
 </div>
 
+<div id="contenedor"></div>
+
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/mustache.js"></script>
 <script type="text/javascript">
