@@ -3,6 +3,7 @@ package serviciosImpl;
 import modelo.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +52,17 @@ public class ServicioUsuariosImpl implements ServicioUsuarios {
     @Override
     public void actualizarUsuario(Usuario usuarioEditar) {
         this.sessionFactory.getCurrentSession().merge(usuarioEditar);
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorEmailYPass(String email, String pass) {
+        Criteria c = this.sessionFactory.getCurrentSession().createCriteria(Usuario.class);
+        c.add(Restrictions.eq("email", email));
+        c.add(Restrictions.eq("pass", pass));
+        Usuario usuario = null;
+        if (c.uniqueResult() != null) {
+            usuario = (Usuario) c.uniqueResult();
+        }
+        return usuario;
     }
 }

@@ -19,8 +19,8 @@ Introduce los datos de nuevo usuario: <br>
 
 <springform:form modelAttribute="nuevoUsuario" action="guardarNuevoUsuario" >
     nombre: <springform:input path="nombre"/> <br>
-    pass: <springform:input path="pass"/> <br>
     email: <springform:input path="email"/> <br>
+    pass: <springform:input path="pass"/> <br>
     <input type="submit" value="REGISTRAR NUEVO USUARIO"/>
 </springform:form>
 

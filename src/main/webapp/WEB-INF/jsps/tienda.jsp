@@ -10,6 +10,12 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        #login_usuario{
+            text-align: center;
+            margin-right: 100px;
+        }
+    </style>
 </head>
 <body>
 <a href="admin">Acceder a administración</a>
@@ -23,11 +29,16 @@
     <a id="" onclick="alert('por hacer...')" href="#">MIS PEDIDOS</a> <br>
 </div>
 
+<div id="login_usuario">Usuario no identificado</div>
 <div id="contenedor"></div>
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/mustache.js"></script>
 <script type="text/javascript">
+
+    // Variables goblales
+    var nombre_login = ""
+
     var plantilla_registro = ""
     var plantilla_login = ""
     var plantilla_libros = ""
@@ -44,17 +55,46 @@
         plantilla_libros = valor
     })
 
+    function comprar_producto(){
+        if(nombre_login == ""){
+            alert("Tienes que identificarte para comprar productos")
+        }else{
+            var id_producto = $(this).attr("id-producto")
+            alert("Añadir producto de id: " + id_producto + " al carrito")
+        }
+    }// end comprar_producto
+
     function obtenerLibros(){
         $.get("librosREST/obtener", function(valor){
             var libros = JSON.parse(valor)
             console.log(libros)
             var info = Mustache.render(plantilla_libros, {xxx:"hola desde mustache", array_libros: libros})
             $("#contenedor").html(info)
+            $(".enlace_comprar_producto").click(comprar_producto)
         })
         $("#contendor").html("cargando...");
     }
     function mostrarLogin(){
         $("#contenedor").html(plantilla_login)
+        $("#form_login").submit(function(evento) {
+            evento.preventDefault()
+            var email = $("#email").val()
+            var pass = $("#pass").val()
+            $.post("usuariosREST/login", {
+                email: email,
+                pass: pass
+            }).done(function(res){
+                var parte1 = res.split(",")[0]
+                var parte2 = res.split(",")[1]
+                if (parte1 == "ok"){
+                    alert("Bienvenido " + parte2 + " ya puedes commprar")
+                    nombre_login = parte2
+                    $("#login_usuario").html("Hola " + parte2)
+                }else{
+                    alert(res)
+                }
+            })
+        })
     }
 
     function mostrarRegistro(){
@@ -69,8 +109,8 @@
             var pass = $("#pass").val()
             $.post("usuariosREST/registrar",{
                 nombre: nombre,
-                email: email,
-                pass: pass
+                pass: pass,
+                email: email
             }).done(function(res){
                 alert(res)
             }) // end done

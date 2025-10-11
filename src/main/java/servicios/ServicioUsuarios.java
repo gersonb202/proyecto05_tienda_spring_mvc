@@ -19,4 +19,6 @@ public interface ServicioUsuarios {
     Usuario obtenerUsuarioPorId(int id);
 
     void actualizarUsuario(Usuario usuarioEditar);
+
+    Usuario obtenerUsuarioPorEmailYPass(String email, String pass);
 }

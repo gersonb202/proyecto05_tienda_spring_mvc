@@ -1,14 +1,14 @@
 package modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "usuarios")
 public class Usuario {
 
     private String nombre;
     private String pass;
+
+    @Column(unique = true)
     private String email;
 
     @Id
